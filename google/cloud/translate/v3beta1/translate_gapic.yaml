@@ -75,7 +75,7 @@ interfaces:
         - source_language_code = "en"
         - target_language_code = "fr"
         - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
+        - parent%location = "global"
         attributes:
         - parameter: contents[0]
           description: The content to translate in string format
@@ -134,7 +134,7 @@ interfaces:
         defaults:
         - content = "Hello, world!"
         - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
+        - parent%location = "global"
         attributes:
         - parameter: content
           description: The text string for performing language detection
@@ -184,7 +184,7 @@ interfaces:
         defaults:
         - display_language_code = "en"
         - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
+        - parent%location = "global"
         attributes:
         - parameter: display_language_code
           description: 'The language to use to return localized, human readable names
@@ -211,7 +211,7 @@ interfaces:
       parameters:
         defaults:
         - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
+        - parent%location = "global"
         attributes:
         - parameter: parent%project
           sample_argument_name: project
@@ -247,6 +247,7 @@ interfaces:
     retry_params_name: default
     field_name_patterns:
       parent: location
+      glossary.name: glossary
     long_running:
       return_type: google.cloud.translation.v3beta1.Glossary
       metadata_type: google.cloud.translation.v3beta1.CreateGlossaryMetadata
@@ -255,6 +256,50 @@ interfaces:
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_create_glossary_beta
+        value_sets:
+        - translate_create_glossary_beta
+    sample_value_sets:
+    - title: " Create Glossary"
+      description: " Create Glossary"
+      id: translate_create_glossary_beta
+      on_success:
+      - print:
+        - Created Glossary.
+      - define: glossary = $resp
+      - print:
+        - 'Glossary name: %s'
+        - glossary.name
+      - print:
+        - 'Entry count: %s'
+        - glossary.entry_count
+      - print:
+        - 'Input URI: %s'
+        - glossary.input_config.gcs_source.input_uri
+      parameters:
+        defaults:
+        - glossary.name%project = "[Your Google Cloud Project ID]"
+        - glossary.name%location = "us-central1"
+        - glossary.name%glossary = "my_glossary_id_123"
+        - glossary.language_codes_set.language_codes[0] = "en"
+        - glossary.language_codes_set.language_codes[1] = "es"
+        - glossary.input_config.gcs_source.input_uri = "gs://cloud-samples-data/translation/glossary.csv"
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: glossary.name%project
+          sample_argument_name: project_2
+        - parameter: glossary.name%location
+        - parameter: glossary.name%glossary
+          sample_argument_name: glossary_id
+        - parameter: glossary.language_codes_set.language_codes[0]
+        - parameter: glossary.language_codes_set.language_codes[1]
+        - parameter: glossary.input_config.gcs_source.input_uri
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
   - name: ListGlossaries
     flattening:
       groups:
@@ -274,6 +319,34 @@ interfaces:
     field_name_patterns:
       parent: location
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_list_glossary_beta
+        value_sets:
+        - translate_list_glossary_beta
+    sample_value_sets:
+    - title: List Glossaries
+      description: List Glossaries
+      id: translate_list_glossary_beta
+      on_success:
+      - define: glossary = $resp
+      - print:
+        - 'Glossary name: %s'
+        - glossary.name
+      - print:
+        - 'Entry count: %s'
+        - glossary.entry_count
+      - print:
+        - 'Input URI: %s'
+        - glossary.input_config.gcs_source.input_uri
+      parameters:
+        defaults:
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
   - name: GetGlossary
     flattening:
       groups:
@@ -286,6 +359,37 @@ interfaces:
     field_name_patterns:
       name: glossary
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_get_glossary_beta
+        value_sets:
+        - translate_get_glossary_beta
+    sample_value_sets:
+    - title: Get Glossary
+      description: Get Glossary
+      id: translate_get_glossary_beta
+      on_success:
+      - define: glossary = $resp
+      - print:
+        - 'Glossary name: %s'
+        - glossary.name
+      - print:
+        - 'Entry count: %s'
+        - glossary.entry_count
+      - print:
+        - 'Input URI: %s'
+        - glossary.input_config.gcs_source.input_uri
+      parameters:
+        defaults:
+        - name%glossary = "[Glossary ID]"
+        - name%project = "[Google Cloud Project ID]"
+        - name%location = "us-central1"
+        attributes:
+        - parameter: name%glossary
+          sample_argument_name: glossary_id
+        - parameter: name%project
+          sample_argument_name: project
+        - parameter: name%location
   - name: DeleteGlossary
     flattening:
       groups:
@@ -305,3 +409,26 @@ interfaces:
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_delete_glossary_beta
+        value_sets:
+        - translate_delete_glossary_beta
+    sample_value_sets:
+    - title: " Delete Glossary"
+      description: " Delete Glossary"
+      id: translate_delete_glossary_beta
+      on_success:
+      - print:
+        - Deleted Glossary.
+      parameters:
+        defaults:
+        - name%project = "[Google Cloud Project ID]"
+        - name%location = "us-central1"
+        - name%glossary = "[Glossary ID]"
+        attributes:
+        - parameter: name%project
+          sample_argument_name: project
+        - parameter: name%location
+        - parameter: name%glossary
+          sample_argument_name: glossary_id

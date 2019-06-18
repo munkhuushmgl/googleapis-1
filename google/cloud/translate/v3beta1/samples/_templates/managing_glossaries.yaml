@@ -1,0 +1,70 @@
+templates:
+
+- name: Translation Glossary Management Sample
+  service: TranslationService
+
+- name: Print Glossary Info ($resp is glossary)
+  response:
+  - define: glossary = $resp
+  - print: ["Glossary name: %s", glossary.name]
+  - print: ["Entry count: %s", glossary.entry_count]
+  - print: ["Input URI: %s", glossary.input_config.gcs_source.input_uri]
+
+- name: Translation Glossary Name
+  mixin: Project and Location (in resource name)
+  request:
+  - field: name%glossary
+    value: "[Glossary ID]"
+    input_parameter: glossary_id
+
+samples:
+
+- region_tag: translate_create_glossary_beta
+  rpc: CreateGlossary
+  mixins:
+  - Translation Glossary Management Sample
+  - Project and Location (in parent path)
+  request:
+  - field: glossary.name%project
+    value: "[Your Google Cloud Project ID]"
+    input_parameter: project_2
+  - field: glossary.name%location
+    value: "us-central1"
+  # TODO comment describing what to set this to
+  - field: glossary.name%glossary
+    value: "my_glossary_id_123"
+    input_parameter: glossary_id
+  # Add comments for language_codes_set and mention other approach
+  - field: glossary.language_codes_set.language_codes[0]
+    value: en
+  - field: glossary.language_codes_set.language_codes[1]
+    value: es
+  - field: glossary.input_config.gcs_source.input_uri
+    value: gs://cloud-samples-data/translation/glossary.csv
+  response:
+  - print: Created Glossary.
+  - include: Print Glossary Info ($resp is glossary)
+
+- region_tag: translate_list_glossary_beta
+  rpc: ListGlossaries
+  mixins:
+  - Translation Glossary Management Sample
+  - Project and Location (in parent path)
+  - Print Glossary Info ($resp is glossary)
+
+- region_tag: translate_get_glossary_beta
+  rpc: GetGlossary
+  mixins:
+  - Translation Glossary Management Sample
+  - Translation Glossary Name
+  - Print Glossary Info ($resp is glossary)
+
+- region_tag: translate_delete_glossary_beta
+  rpc: DeleteGlossary
+  mixins:
+  - Translation Glossary Management Sample
+  - Project and Location (in resource name)
+  - Translation Glossary Name
+  response:
+  - print: Deleted Glossary.
+  

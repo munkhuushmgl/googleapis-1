@@ -40,7 +40,7 @@ samples:
     value: "[Google Cloud Project ID]"
     input_parameter: project
   - field: parent%location
-    value: us-central1
+    value: global
   response:
   - comment:
     - Display the translation for each input text provided to %s

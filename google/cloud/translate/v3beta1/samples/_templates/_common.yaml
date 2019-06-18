@@ -18,11 +18,11 @@ templates:
 - name: Project and Location (in parent path)
   mixins:
   - Google Cloud Project ID (in parent path)
-  - Global Location (in parent path)
+  - Location (in parent path)
 - name: Project and Global Location (in parent path)
   mixins:
   - Google Cloud Project ID (in parent path)
-  - Location (in parent path)
+  - Global Location (in parent path)
 - name: Google Cloud Project ID (in resource name)
   request:
   - field: name%project

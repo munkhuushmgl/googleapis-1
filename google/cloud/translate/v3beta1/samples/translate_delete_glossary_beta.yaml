@@ -18,34 +18,20 @@
 type: com.google.api.codegen.SampleConfigProto
 schema_version: 1.2.0
 samples:
-- region_tag: translate_list_language_names_beta
-  title: " List Supported Language Names and Codes"
-  description: " Listing supported languages with target language name"
+- region_tag: translate_delete_glossary_beta
+  title: " Delete Glossary"
+  description: " Delete Glossary"
   service: TranslationService
-  rpc: GetSupportedLanguages
+  rpc: DeleteGlossary
   request:
-  - field: display_language_code
-    value: en
-    comment: 'The language to use to return localized, human readable names of supported
-      languages.
-
-'
-    input_parameter: language_code
-  - field: parent%project
+  - field: name%project
     value: "[Google Cloud Project ID]"
     input_parameter: project
-  - field: parent%location
-    value: global
+  - field: name%location
+    value: us-central1
+  - field: name%glossary
+    value: "[Glossary ID]"
+    input_parameter: glossary_id
   response:
-  - comment:
-    - List language codes of supported languages
-  - loop:
-      collection: "$resp.languages"
-      variable: language
-      body:
-      - print:
-        - 'Language Code: %s'
-        - language.language_code
-      - print:
-        - 'Display Name: %s'
-        - language.display_name
+  - print:
+    - Deleted Glossary.
