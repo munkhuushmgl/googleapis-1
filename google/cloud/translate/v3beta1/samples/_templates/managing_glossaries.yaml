@@ -25,16 +25,17 @@ samples:
   - Translation Glossary Management Sample
   - Project and Location (in parent path)
   request:
+  # https://github.com/googleapis/gapic-generator/issues/2797
   - field: glossary.name%project
     value: "[Your Google Cloud Project ID]"
     input_parameter: project_2
   - field: glossary.name%location
     value: "us-central1"
-  # TODO comment describing what to set this to
+  # TODO comment describing what to set this to (user-submitted bug)
   - field: glossary.name%glossary
     value: "my_glossary_id_123"
     input_parameter: glossary_id
-  # Add comments for language_codes_set and mention other approach
+  # Add comments for language_codes_set and mention other glossary type
   - field: glossary.language_codes_set.language_codes[0]
     value: en
   - field: glossary.language_codes_set.language_codes[1]
@@ -67,4 +68,3 @@ samples:
   - Translation Glossary Name
   response:
   - print: Deleted Glossary.
-  

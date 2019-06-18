@@ -25,7 +25,6 @@ test:
           sample: translate_list_language_names_beta
           params:
             project: {variable: project_id}
-            language_code: {literal: "fr"}
       - assert_contains:
         - literal: "Language Code: en"
         - literal: "Display Name: English"
