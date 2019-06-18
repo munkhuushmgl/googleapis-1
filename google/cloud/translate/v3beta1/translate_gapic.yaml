@@ -1,6 +1,5 @@
 type: com.google.api.codegen.ConfigProto
 config_schema_version: 1.0.0
-# The settings of generated code in a specific language.
 language_settings:
   java:
     package_name: com.google.cloud.translate.v3beta1
@@ -17,26 +16,13 @@ language_settings:
   nodejs:
     package_name: translate.v3beta1
     domain_layer_location: google-cloud
-# A list of API interface configurations.
 interfaces:
-# The fully qualified name of the API interface.
 - name: google.cloud.translation.v3beta1.TranslationService
-  # A list of resource collection configurations.
-  # Consists of a name_pattern and an entity_name.
-  # The name_pattern is a pattern to describe the names of the resources of this
-  # collection, using the platform's conventions for URI patterns. A generator
-  # may use this to generate methods to compose and decompose such names. The
-  # pattern should use named placeholders as in `shelves/{shelf}/books/{book}`;
-  # those will be taken as hints for the parameter names of the generated
-  # methods. If empty, no name methods are generated.
-  # The entity_name is the name to be used as a basis for generated methods and
-  # classes.
   collections:
   - name_pattern: projects/{project}/locations/{location}
     entity_name: location
   - name_pattern: projects/{project}/locations/{location}/glossaries/{glossary}
     entity_name: glossary
-  # Definition for retryable codes.
   retry_codes_def:
   - name: idempotent
     retry_codes:
@@ -44,7 +30,6 @@ interfaces:
     - UNAVAILABLE
   - name: non_idempotent
     retry_codes: []
-  # Definition for retry/backoff parameters.
   retry_params_def:
   - name: default
     initial_retry_delay_millis: 100
@@ -54,60 +39,6 @@ interfaces:
     rpc_timeout_multiplier: 1
     max_rpc_timeout_millis: 20000
     total_timeout_millis: 600000
-  # A list of method configurations.
-  # Common properties:
-  #
-  #   name - The simple name of the method.
-  #
-  #   flattening - Specifies the configuration for parameter flattening.
-  #   Describes the parameter groups for which a generator should produce method
-  #   overloads which allow a client to directly pass request message fields as
-  #   method parameters. This information may or may not be used, depending on
-  #   the target language.
-  #   Consists of groups, which each represent a list of parameters to be
-  #   flattened. Each parameter listed must be a field of the request message.
-  #
-  #   required_fields - Fields that are always required for a request to be
-  #   valid.
-  #
-  #   resource_name_treatment - An enum that specifies how to treat the resource
-  #   name formats defined in the field_name_patterns and
-  #   response_field_name_patterns fields.
-  #   UNSET: default value
-  #   NONE: the collection configs will not be used by the generated code.
-  #   VALIDATE: string fields will be validated by the client against the
-  #   specified resource name formats.
-  #   STATIC_TYPES: the client will use generated types for resource names.
-  #
-  #   page_streaming - Specifies the configuration for paging.
-  #   Describes information for generating a method which transforms a paging
-  #   list RPC into a stream of resources.
-  #   Consists of a request and a response.
-  #   The request specifies request information of the list method. It defines
-  #   which fields match the paging pattern in the request. The request consists
-  #   of a page_size_field and a token_field. The page_size_field is the name of
-  #   the optional field specifying the maximum number of elements to be
-  #   returned in the response. The token_field is the name of the field in the
-  #   request containing the page token.
-  #   The response specifies response information of the list method. It defines
-  #   which fields match the paging pattern in the response. The response
-  #   consists of a token_field and a resources_field. The token_field is the
-  #   name of the field in the response containing the next page token. The
-  #   resources_field is the name of the field in the response containing the
-  #   list of resources belonging to the page.
-  #
-  #   retry_codes_name - Specifies the configuration for retryable codes. The
-  #   name must be defined in interfaces.retry_codes_def.
-  #
-  #   retry_params_name - Specifies the configuration for retry/backoff
-  #   parameters. The name must be defined in interfaces.retry_params_def.
-  #
-  #   field_name_patterns - Maps the field name of the request type to
-  #   entity_name of interfaces.collections.
-  #   Specifies the string pattern that the field must follow.
-  #
-  #   timeout_millis - Specifies the default timeout for a non-retrying call. If
-  #   the call is retrying, refer to retry_params_name instead.
   methods:
   - name: TranslateText
     required_fields:
@@ -118,6 +49,46 @@ interfaces:
     field_name_patterns:
       parent: location
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_translate_text_beta
+        value_sets:
+        - translate_translate_text_beta
+    sample_value_sets:
+    - title: " Translating Text"
+      description: " Translating Text"
+      id: translate_translate_text_beta
+      on_success:
+      - comment:
+        - Display the translation for each input text provided to %s
+        - contents
+      - loop:
+          collection: "$resp.translations"
+          variable: translation
+          body:
+          - print:
+            - 'Translated text: %s'
+            - translation.translated_text
+      parameters:
+        defaults:
+        - contents[0] = "Hello, world!"
+        - source_language_code = "en"
+        - target_language_code = "fr"
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: contents[0]
+          description: The content to translate in string format
+          sample_argument_name: text
+        - parameter: source_language_code
+          description: Optional. The BCP-47 language code of the input text.
+          sample_argument_name: source_language
+        - parameter: target_language_code
+          description: Required. The BCP-47 language code to use for translation.
+          sample_argument_name: target_language
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
   - name: DetectLanguage
     flattening:
       groups:
@@ -125,12 +96,52 @@ interfaces:
         - parent
         - model
         - mime_type
-    required_fields:
+    required_fields: 
     retry_codes_name: non_idempotent
     retry_params_name: default
     field_name_patterns:
       parent: location
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_detect_language_beta
+        value_sets:
+        - translate_detect_language_beta
+    sample_value_sets:
+    - title: " Detect Language"
+      description: " Detecting the language of a text string"
+      id: translate_detect_language_beta
+      on_success:
+      - comment:
+        - |
+          Display list of detected languages sorted by detection confidence.
+          The most probable language is first.
+      - loop:
+          collection: "$resp.languages"
+          variable: language
+          body:
+          - comment:
+            - The language detected
+          - print:
+            - 'Language code: %s'
+            - language.language_code
+          - comment:
+            - Confidence of detection result for this language
+          - print:
+            - 'Confidence: %s'
+            - language.confidence
+      parameters:
+        defaults:
+        - content = "Hello, world!"
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: content
+          description: The text string for performing language detection
+          sample_argument_name: text
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
   - name: GetSupportedLanguages
     flattening:
       groups:
@@ -138,12 +149,73 @@ interfaces:
         - parent
         - display_language_code
         - model
-    required_fields:
+    required_fields: 
     retry_codes_name: idempotent
     retry_params_name: default
     field_name_patterns:
       parent: location
     timeout_millis: 60000
+    samples:
+      standalone:
+      - region_tag: translate_list_language_names_beta
+        value_sets:
+        - translate_list_language_names_beta
+      - region_tag: translate_list_codes_beta
+        value_sets:
+        - translate_list_codes_beta
+    sample_value_sets:
+    - title: " List Supported Language Names and Codes"
+      description: " Listing supported languages with target language name"
+      id: translate_list_language_names_beta
+      on_success:
+      - comment:
+        - List language codes of supported languages
+      - loop:
+          collection: "$resp.languages"
+          variable: language
+          body:
+          - print:
+            - 'Language Code: %s'
+            - language.language_code
+          - print:
+            - 'Display Name: %s'
+            - language.display_name
+      parameters:
+        defaults:
+        - display_language_code = "en"
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: display_language_code
+          description: 'The language to use to return localized, human readable names
+            of supported languages.
+
+'
+          sample_argument_name: language_code
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
+    - title: " List Supported Language Codes"
+      description: " Getting a list of supported language codes"
+      id: translate_list_codes_beta
+      on_success:
+      - comment:
+        - List language codes of supported languages
+      - loop:
+          collection: "$resp.languages"
+          variable: language
+          body:
+          - print:
+            - 'Language Code: %s'
+            - language.language_code
+      parameters:
+        defaults:
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: parent%project
+          sample_argument_name: project
+        - parameter: parent%location
   - name: BatchTranslateText
     required_fields:
     - source_language_code
@@ -189,7 +261,7 @@ interfaces:
       - parameters:
         - parent
         - filter
-    required_fields:
+    required_fields: 
     page_streaming:
       request:
         page_size_field: page_size

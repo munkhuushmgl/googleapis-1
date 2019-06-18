@@ -1,0 +1,33 @@
+samples:
+# TODO(beccasaurus) Try without location (using additional_bindings)
+- region_tag: translate_translate_text_beta
+  title: Translating Text
+  description: Translating Text
+  service: TranslationService
+  rpc: TranslateText
+  mixins:
+  - Project and Global Location (in parent path)
+  request:
+  - field: contents[0]
+    value: "Hello, world!"
+    comment: The content to translate in string format
+    input_parameter: text
+  - field: source_language_code
+    value: "en"
+    comment: Optional. The BCP-47 language code of the input text.
+    input_parameter: source_language
+  - field: target_language_code
+    value: "fr"
+    comment: Required. The BCP-47 language code to use for translation.
+    input_parameter: target_language
+  response:
+  - comment:
+    - "Display the translation for each input text provided to %s"
+    - contents
+  - loop:
+      collection: $resp.translations
+      variable: translation
+      body:
+      - print:
+        - "Translated text: %s"
+        - translation.translated_text

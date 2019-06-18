@@ -1,0 +1,7 @@
+sample_compositions:
+- output: ../translate_gapic.yaml
+  paths:
+  - _templates/
+- output: .
+  paths:
+  - _templates/

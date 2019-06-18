@@ -1,0 +1,29 @@
+samples:
+- region_tag: translate_detect_language_beta
+  title: Detect Language
+  description: Detecting the language of a text string
+  service: TranslationService
+  rpc: DetectLanguage
+  mixins:
+  - Project and Global Location (in parent path)
+  request:
+  - field: content
+    value: "Hello, world!"
+    comment: The text string for performing language detection
+    input_parameter: text
+  response:
+  - comment: |
+      Display list of detected languages sorted by detection confidence.
+      The most probable language is first.
+  - loop:
+      collection: $resp.languages
+      variable: language
+      body:
+      - comment: The language detected
+      - print:
+        - "Language code: %s"
+        - language.language_code
+      - comment: Confidence of detection result for this language
+      - print:
+        - "Confidence: %s"
+        - language.confidence

@@ -1,0 +1,38 @@
+samples:
+
+- region_tag: translate_list_codes_beta
+  title: List Supported Language Codes
+  description: Getting a list of supported language codes
+  service: TranslationService
+  rpc: GetSupportedLanguages
+  mixins:
+  - Project and Global Location (in parent path)
+  response:
+  - comment: List language codes of supported languages
+  - loop:
+      collection: $resp.languages
+      variable: language
+      body:
+      - print: ["Language Code: %s", language.language_code]
+
+- region_tag: translate_list_language_names_beta
+  title: List Supported Language Names and Codes
+  description: Listing supported languages with target language name
+  service: TranslationService
+  rpc: GetSupportedLanguages
+  mixins:
+  - Project and Global Location (in parent path)
+  request:
+  - field: display_language_code
+    value: "en"
+    comment: |
+      The language to use to return localized, human readable names of supported languages.
+    input_parameter: language_code
+  response:
+  - comment: List language codes of supported languages
+  - loop:
+      collection: $resp.languages
+      variable: language
+      body:
+      - print: ["Language Code: %s", language.language_code]
+      - print: ["Display Name: %s", language.display_name]

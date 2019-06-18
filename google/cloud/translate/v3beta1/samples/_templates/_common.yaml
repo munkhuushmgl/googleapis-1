@@ -1,0 +1,46 @@
+# These could be shared across APIs.
+# Helpers for projects/locations paths.
+templates:
+- name: Google Cloud Project ID (in parent path)
+  request:
+  - field: parent%project
+    value: "[Google Cloud Project ID]"
+    input_parameter: project
+- name: Location (in parent path)
+  request:
+  - field: parent%location
+    value: "us-central1"
+- name: Global Location (in parent path)
+  mixins: Location (in parent path)
+  request:
+  - field: parent%location
+    value: "global"
+- name: Project and Location (in parent path)
+  mixins:
+  - Google Cloud Project ID (in parent path)
+  - Global Location (in parent path)
+- name: Project and Global Location (in parent path)
+  mixins:
+  - Google Cloud Project ID (in parent path)
+  - Location (in parent path)
+- name: Google Cloud Project ID (in resource name)
+  request:
+  - field: name%project
+    value: "[Google Cloud Project ID]"
+    input_parameter: project
+- name: Location (in resource name)
+  request:
+  - field: name%location
+    value: "us-central1"
+- name: Global Location (in resource name)
+  request:
+  - field: name%location
+    value: "global"
+- name: Project and Location (in resource name)
+  mixins:
+  - Google Cloud Project ID (in resource name)
+  - Location (in resource name)
+- name: Project and Global Location (in resource name)
+  mixins:
+  - Google Cloud Project ID (in resource name)
+  - Global Location (in resource name)
