@@ -1,5 +1,6 @@
 type: com.google.api.codegen.ConfigProto
 config_schema_version: 1.0.0
+# The settings of generated code in a specific language.
 language_settings:
   java:
     package_name: com.google.cloud.automl.v1beta1
@@ -16,11 +17,24 @@ language_settings:
   nodejs:
     package_name: automl.v1beta1
     domain_layer_location: google-cloud
+# A list of API interface configurations.
 interfaces:
+  # The fully qualified name of the API interface.
 - name: google.cloud.automl.v1beta1.PredictionService
+  # A list of resource collection configurations.
+  # Consists of a name_pattern and an entity_name.
+  # The name_pattern is a pattern to describe the names of the resources of this
+  # collection, using the platform's conventions for URI patterns. A generator
+  # may use this to generate methods to compose and decompose such names. The
+  # pattern should use named placeholders as in `shelves/{shelf}/books/{book}`;
+  # those will be taken as hints for the parameter names of the generated
+  # methods. If empty, no name methods are generated.
+  # The entity_name is the name to be used as a basis for generated methods and
+  # classes.
   collections:
   - name_pattern: projects/{project}/locations/{location}/models/{model}
     entity_name: model
+  # Definition for retryable codes.
   retry_codes_def:
   - name: idempotent
     retry_codes:
@@ -28,6 +42,7 @@ interfaces:
     - DEADLINE_EXCEEDED
   - name: non_idempotent
     retry_codes: []
+  # Definition for retry/backoff parameters.
   retry_params_def:
   - name: default
     initial_retry_delay_millis: 100
@@ -37,6 +52,60 @@ interfaces:
     rpc_timeout_multiplier: 1
     max_rpc_timeout_millis: 60000
     total_timeout_millis: 600000
+  # A list of method configurations.
+  # Common properties:
+  #
+  #   name - The simple name of the method.
+  #
+  #   flattening - Specifies the configuration for parameter flattening.
+  #   Describes the parameter groups for which a generator should produce method
+  #   overloads which allow a client to directly pass request message fields as
+  #   method parameters. This information may or may not be used, depending on
+  #   the target language.
+  #   Consists of groups, which each represent a list of parameters to be
+  #   flattened. Each parameter listed must be a field of the request message.
+  #
+  #   required_fields - Fields that are always required for a request to be
+  #   valid.
+  #
+  #   resource_name_treatment - An enum that specifies how to treat the resource
+  #   name formats defined in the field_name_patterns and
+  #   response_field_name_patterns fields.
+  #   UNSET: default value
+  #   NONE: the collection configs will not be used by the generated code.
+  #   VALIDATE: string fields will be validated by the client against the
+  #   specified resource name formats.
+  #   STATIC_TYPES: the client will use generated types for resource names.
+  #
+  #   page_streaming - Specifies the configuration for paging.
+  #   Describes information for generating a method which transforms a paging
+  #   list RPC into a stream of resources.
+  #   Consists of a request and a response.
+  #   The request specifies request information of the list method. It defines
+  #   which fields match the paging pattern in the request. The request consists
+  #   of a page_size_field and a token_field. The page_size_field is the name of
+  #   the optional field specifying the maximum number of elements to be
+  #   returned in the response. The token_field is the name of the field in the
+  #   request containing the page token.
+  #   The response specifies response information of the list method. It defines
+  #   which fields match the paging pattern in the response. The response
+  #   consists of a token_field and a resources_field. The token_field is the
+  #   name of the field in the response containing the next page token. The
+  #   resources_field is the name of the field in the response containing the
+  #   list of resources belonging to the page.
+  #
+  #   retry_codes_name - Specifies the configuration for retryable codes. The
+  #   name must be defined in interfaces.retry_codes_def.
+  #
+  #   retry_params_name - Specifies the configuration for retry/backoff
+  #   parameters. The name must be defined in interfaces.retry_params_def.
+  #
+  #   field_name_patterns - Maps the field name of the request type to
+  #   entity_name of interfaces.collections.
+  #   Specifies the string pattern that the field must follow.
+  #
+  #   timeout_millis - Specifies the default timeout for a non-retrying call. If
+  #   the call is retrying, refer to retry_params_name instead.
   methods:
   - name: Predict
     flattening:
@@ -78,7 +147,18 @@ interfaces:
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
     timeout_millis: 20000
+  # The fully qualified name of the API interface.
 - name: google.cloud.automl.v1beta1.AutoMl
+  # A list of resource collection configurations.
+  # Consists of a name_pattern and an entity_name.
+  # The name_pattern is a pattern to describe the names of the resources of this
+  # collection, using the platform's conventions for URI patterns. A generator
+  # may use this to generate methods to compose and decompose such names. The
+  # pattern should use named placeholders as in `shelves/{shelf}/books/{book}`;
+  # those will be taken as hints for the parameter names of the generated
+  # methods. If empty, no name methods are generated.
+  # The entity_name is the name to be used as a basis for generated methods and
+  # classes.
   collections:
   - name_pattern: projects/{project}/locations/{location}
     entity_name: location
@@ -94,6 +174,7 @@ interfaces:
     entity_name: table_spec
   - name_pattern: projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}
     entity_name: column_spec
+  # Definition for retryable codes.
   retry_codes_def:
   - name: idempotent
     retry_codes:
@@ -101,6 +182,7 @@ interfaces:
     - DEADLINE_EXCEEDED
   - name: non_idempotent
     retry_codes: []
+  # Definition for retry/backoff parameters.
   retry_params_def:
   - name: default
     initial_retry_delay_millis: 100
@@ -110,6 +192,60 @@ interfaces:
     rpc_timeout_multiplier: 1
     max_rpc_timeout_millis: 20000
     total_timeout_millis: 600000
+  # A list of method configurations.
+  # Common properties:
+  #
+  #   name - The simple name of the method.
+  #
+  #   flattening - Specifies the configuration for parameter flattening.
+  #   Describes the parameter groups for which a generator should produce method
+  #   overloads which allow a client to directly pass request message fields as
+  #   method parameters. This information may or may not be used, depending on
+  #   the target language.
+  #   Consists of groups, which each represent a list of parameters to be
+  #   flattened. Each parameter listed must be a field of the request message.
+  #
+  #   required_fields - Fields that are always required for a request to be
+  #   valid.
+  #
+  #   resource_name_treatment - An enum that specifies how to treat the resource
+  #   name formats defined in the field_name_patterns and
+  #   response_field_name_patterns fields.
+  #   UNSET: default value
+  #   NONE: the collection configs will not be used by the generated code.
+  #   VALIDATE: string fields will be validated by the client against the
+  #   specified resource name formats.
+  #   STATIC_TYPES: the client will use generated types for resource names.
+  #
+  #   page_streaming - Specifies the configuration for paging.
+  #   Describes information for generating a method which transforms a paging
+  #   list RPC into a stream of resources.
+  #   Consists of a request and a response.
+  #   The request specifies request information of the list method. It defines
+  #   which fields match the paging pattern in the request. The request consists
+  #   of a page_size_field and a token_field. The page_size_field is the name of
+  #   the optional field specifying the maximum number of elements to be
+  #   returned in the response. The token_field is the name of the field in the
+  #   request containing the page token.
+  #   The response specifies response information of the list method. It defines
+  #   which fields match the paging pattern in the response. The response
+  #   consists of a token_field and a resources_field. The token_field is the
+  #   name of the field in the response containing the next page token. The
+  #   resources_field is the name of the field in the response containing the
+  #   list of resources belonging to the page.
+  #
+  #   retry_codes_name - Specifies the configuration for retryable codes. The
+  #   name must be defined in interfaces.retry_codes_def.
+  #
+  #   retry_params_name - Specifies the configuration for retry/backoff
+  #   parameters. The name must be defined in interfaces.retry_params_def.
+  #
+  #   field_name_patterns - Maps the field name of the request type to
+  #   entity_name of interfaces.collections.
+  #   Specifies the string pattern that the field must follow.
+  #
+  #   timeout_millis - Specifies the default timeout for a non-retrying call. If
+  #   the call is retrying, refer to retry_params_name instead.
   methods:
   - name: CreateDataset
     flattening:
@@ -126,259 +262,6 @@ interfaces:
       parent: location
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_create_dataset
-        value_sets:
-        - automl_vision_create_dataset
-      - region_tag: automl_translation_create_dataset
-        value_sets:
-        - automl_translation_create_dataset
-      - region_tag: automl_natural_language_entity_create_dataset
-        value_sets:
-        - automl_natural_language_entity_create_dataset
-      - region_tag: automl_natural_language_create_dataset
-        value_sets:
-        - automl_natural_language_create_dataset
-      - region_tag: automl_natural_language_sentiment_create_dataset
-        value_sets:
-        - automl_natural_language_sentiment_create_dataset
-    sample_value_sets:
-    - title: Create Dataset
-      description: Create Dataset
-      id: automl_natural_language_sentiment_create_dataset
-      on_success:
-      - print:
-        - Created Dataset.
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get %s from Text Sentiment Dataset Metadata
-        - sentiment_max
-      - print:
-        - 'Sentiment Max: %s'
-        - dataset.text_sentiment_dataset_metadata.sentiment_max
-      parameters:
-        defaults:
-        - dataset.display_name = "Display_Name_123"
-        - dataset.description = "Description of this dataset"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        - dataset.text_sentiment_dataset_metadata.sentiment_max = 10
-        attributes:
-        - parameter: dataset.display_name
-          description: |
-            The name of the dataset to show in the interface.
-            The name can be up to 32 characters long and can consist only of
-            ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
-            Must be unique within the scope of the provided GCP Project and Location.
-          sample_argument_name: display_name
-        - parameter: dataset.description
-          description: User-provided description of dataset (optional)
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-        - parameter: dataset.text_sentiment_dataset_metadata.sentiment_max
-          description: |
-            A sentiment is expressed as an integer ordinal, where higher value means
-            a more positive sentiment. The range of sentiments that will be used is
-            between 0 and sentiment_max (inclusive on both ends), and all the values
-            in the range must be represented in the dataset before a model can be created.
-            sentiment_max value must be between 1 and 10 (inclusive).
-    - title: Create Dataset
-      description: Create Dataset
-      id: automl_vision_create_dataset
-      on_success:
-      - print:
-        - Created Dataset.
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Print image classification type
-      - print:
-        - 'Image classification dataset metadata type: %s'
-        - dataset.image_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - dataset.display_name = "Display_Name_123"
-        - dataset.description = "Description of this dataset"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        - dataset.image_classification_dataset_metadata.classification_type = "MULTILABEL"
-        attributes:
-        - parameter: dataset.display_name
-          description: |
-            The name of the dataset to show in the interface.
-            The name can be up to 32 characters long and can consist only of
-            ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
-            Must be unique within the scope of the provided GCP Project and Location.
-          sample_argument_name: display_name
-        - parameter: dataset.description
-          description: User-provided description of dataset (optional)
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-        - parameter: dataset.image_classification_dataset_metadata.classification_type
-          description: |
-            Type of the classification problem.
-            MULTICLASS: At most one label is allowed per example.
-            MULTILABEL: Multiple labels are allowed for one example.
-    - title: Create Dataset
-      description: Create Dataset
-      id: automl_translation_create_dataset
-      on_success:
-      - print:
-        - Created Dataset.
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Translation Dataset Metadata
-      - print:
-        - 'Source language code: %s'
-        - dataset.translation_dataset_metadata.source_language_code
-      - print:
-        - 'Target language code: %s'
-        - dataset.translation_dataset_metadata.target_language_code
-      parameters:
-        defaults:
-        - dataset.display_name = "Display_Name_123"
-        - dataset.description = "Description of this dataset"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        - dataset.translation_dataset_metadata.source_language_code = "en"
-        - dataset.translation_dataset_metadata.target_language_code = "fr"
-        attributes:
-        - parameter: dataset.display_name
-          description: |
-            The name of the dataset to show in the interface.
-            The name can be up to 32 characters long and can consist only of
-            ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
-            Must be unique within the scope of the provided GCP Project and Location.
-          sample_argument_name: display_name
-        - parameter: dataset.description
-          description: User-provided description of dataset (optional)
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-        - parameter: dataset.translation_dataset_metadata.source_language_code
-          description: Required. The BCP-47 language code of the source language.
-        - parameter: dataset.translation_dataset_metadata.target_language_code
-          description: Required. The BCP-47 language code of the target language.
-    - title: Create Dataset
-      description: Create Dataset
-      id: automl_natural_language_entity_create_dataset
-      on_success:
-      - print:
-        - Created Dataset.
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      parameters:
-        defaults:
-        - dataset.display_name = "Display_Name_123"
-        - dataset.description = "Description of this dataset"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        - dataset.text_extraction_dataset_metadata = {}
-        attributes:
-        - parameter: dataset.display_name
-          description: |
-            The name of the dataset to show in the interface.
-            The name can be up to 32 characters long and can consist only of
-            ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
-            Must be unique within the scope of the provided GCP Project and Location.
-          sample_argument_name: display_name
-        - parameter: dataset.description
-          description: User-provided description of dataset (optional)
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-        - parameter: dataset.text_extraction_dataset_metadata
-          description: |
-            Initialized text_extraction_dataset_metadata field must be provided.
-            This specifies this Dataset is to be used for text extraction.
-    - title: Create Dataset
-      description: Create Dataset
-      id: automl_natural_language_create_dataset
-      on_success:
-      - print:
-        - Created Dataset.
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get the classification type
-      - print:
-        - 'Text Classification Type: %s'
-        - dataset.text_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - dataset.display_name = "Display_Name_123"
-        - dataset.description = "Description of this dataset"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        - dataset.text_classification_dataset_metadata.classification_type = "MULTILABEL"
-        attributes:
-        - parameter: dataset.display_name
-          description: |
-            The name of the dataset to show in the interface.
-            The name can be up to 32 characters long and can consist only of
-            ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
-            Must be unique within the scope of the provided GCP Project and Location.
-          sample_argument_name: display_name
-        - parameter: dataset.description
-          description: User-provided description of dataset (optional)
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-        - parameter: dataset.text_classification_dataset_metadata.classification_type
-          description: |
-            Type of the classification problem.
-            MULTICLASS: At most one label is allowed per example.
-            MULTILABEL: Multiple labels are allowed for one example.
   - name: UpdateDataset
     flattening:
       groups:
@@ -391,12 +274,6 @@ interfaces:
     field_name_patterns:
       dataset.name: dataset
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_update_dataset
-        value_sets:
-        - automl_vision_update_dataset
-    sample_value_sets: []
   - name: GetDataset
     flattening:
       groups:
@@ -410,173 +287,6 @@ interfaces:
       name: dataset
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_get_dataset
-        value_sets:
-        - automl_vision_get_dataset
-      - region_tag: automl_translation_get_dataset
-        value_sets:
-        - automl_translation_get_dataset
-      - region_tag: automl_natural_language_entity_get_dataset
-        value_sets:
-        - automl_natural_language_entity_get_dataset
-      - region_tag: automl_natural_language_get_dataset
-        value_sets:
-        - automl_natural_language_get_dataset
-      - region_tag: automl_natural_language_sentiment_get_dataset
-        value_sets:
-        - automl_natural_language_sentiment_get_dataset
-    sample_value_sets:
-    - title: Get Dataset
-      description: Get Dataset
-      id: automl_vision_get_dataset
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Print image classification type
-      - print:
-        - 'Image classification dataset metadata type: %s'
-        - dataset.image_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Get Dataset
-      description: Get Dataset
-      id: automl_natural_language_sentiment_get_dataset
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get %s from Text Sentiment Dataset Metadata
-        - sentiment_max
-      - print:
-        - 'Sentiment Max: %s'
-        - dataset.text_sentiment_dataset_metadata.sentiment_max
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Get Dataset
-      description: Get Dataset
-      id: automl_natural_language_get_dataset
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get the classification type
-      - print:
-        - 'Text Classification Type: %s'
-        - dataset.text_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Get Dataset
-      description: Get Dataset
-      id: automl_translation_get_dataset
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Translation Dataset Metadata
-      - print:
-        - 'Source language code: %s'
-        - dataset.translation_dataset_metadata.source_language_code
-      - print:
-        - 'Target language code: %s'
-        - dataset.translation_dataset_metadata.target_language_code
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Get Dataset
-      description: Get Dataset
-      id: automl_natural_language_entity_get_dataset
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
   - name: ListDatasets
     flattening:
       groups:
@@ -597,188 +307,6 @@ interfaces:
       parent: location
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_list_datasets
-        value_sets:
-        - automl_vision_list_datasets
-      - region_tag: automl_translation_list_datasets
-        value_sets:
-        - automl_translation_list_datasets
-      - region_tag: automl_natural_language_entity_list_datasets
-        value_sets:
-        - automl_natural_language_entity_list_datasets
-      - region_tag: automl_natural_language_list_datasets
-        value_sets:
-        - automl_natural_language_list_datasets
-      - region_tag: automl_natural_language_sentiment_list_datasets
-        value_sets:
-        - automl_natural_language_sentiment_list_datasets
-    sample_value_sets:
-    - title: List Datasets
-      description: List Datasets
-      id: automl_vision_list_datasets
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Print image classification type
-      - print:
-        - 'Image classification dataset metadata type: %s'
-        - dataset.image_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - filter = "image_classification_dataset_metadata:*"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: filter
-          description: |
-            An expression for filtering the results of the request.
-            This filters for Datasets which have image_classification_dataset_metadata.
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-    - title: List Datasets
-      description: List Datasets
-      id: automl_natural_language_list_datasets
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get the classification type
-      - print:
-        - 'Text Classification Type: %s'
-        - dataset.text_classification_dataset_metadata.classification_type
-      parameters:
-        defaults:
-        - filter = "text_classification_dataset_metadata:*"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: filter
-          description: |
-            An expression for filtering the results of the request.
-            This filters for Datasets which have text_classification_dataset_metadata.
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-    - title: List Datasets
-      description: List Datasets
-      id: automl_translation_list_datasets
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Translation Dataset Metadata
-      - print:
-        - 'Source language code: %s'
-        - dataset.translation_dataset_metadata.source_language_code
-      - print:
-        - 'Target language code: %s'
-        - dataset.translation_dataset_metadata.target_language_code
-      parameters:
-        defaults:
-        - filter = "translation_dataset_metadata:*"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: filter
-          description: |
-            An expression for filtering the results of the request.
-            This filters for Datasets which have translation_dataset_metadata.
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-    - title: List Datasets
-      description: List Datasets
-      id: automl_natural_language_sentiment_list_datasets
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      - comment:
-        - Get %s from Text Sentiment Dataset Metadata
-        - sentiment_max
-      - print:
-        - 'Sentiment Max: %s'
-        - dataset.text_sentiment_dataset_metadata.sentiment_max
-      parameters:
-        defaults:
-        - filter = "text_sentiment_dataset_metadata:*"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: filter
-          description: |
-            An expression for filtering the results of the request.
-            This filters for Datasets which have text_sentiment_dataset_metadata.
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
-    - title: List Datasets
-      description: List Datasets
-      id: automl_natural_language_entity_list_datasets
-      on_success:
-      - define: dataset = $resp
-      - print:
-        - 'Name: %s'
-        - dataset.name
-      - print:
-        - 'Display Name: %s'
-        - dataset.display_name
-      - print:
-        - 'Description: %s'
-        - dataset.description
-      parameters:
-        defaults:
-        - filter = "text_extraction_dataset_metadata:*"
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: filter
-          description: |
-            An expression for filtering the results of the request.
-            This filters for Datasets which have text_extraction_dataset_metadata.
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
   - name: DeleteDataset
     flattening:
       groups:
@@ -799,109 +327,6 @@ interfaces:
       poll_delay_multiplier: 1.5
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
-    samples:
-      standalone:
-      - region_tag: automl_vision_delete_dataset
-        value_sets:
-        - automl_vision_delete_dataset
-      - region_tag: automl_translation_delete_dataset
-        value_sets:
-        - automl_translation_delete_dataset
-      - region_tag: automl_natural_language_entity_delete_dataset
-        value_sets:
-        - automl_natural_language_entity_delete_dataset
-      - region_tag: automl_natural_language_delete_dataset
-        value_sets:
-        - automl_natural_language_delete_dataset
-      - region_tag: automl_natural_language_sentiment_delete_dataset
-        value_sets:
-        - automl_natural_language_sentiment_delete_dataset
-    sample_value_sets:
-    - title: Delete Dataset
-      description: Delete Dataset
-      id: automl_natural_language_entity_delete_dataset
-      on_success:
-      - print:
-        - Deleted Dataset.
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Delete Dataset
-      description: Delete Dataset
-      id: automl_translation_delete_dataset
-      on_success:
-      - print:
-        - Deleted Dataset.
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Delete Dataset
-      description: Delete Dataset
-      id: automl_natural_language_delete_dataset
-      on_success:
-      - print:
-        - Deleted Dataset.
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Delete Dataset
-      description: Delete Dataset
-      id: automl_natural_language_sentiment_delete_dataset
-      on_success:
-      - print:
-        - Deleted Dataset.
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
-    - title: Delete Dataset
-      description: Delete Dataset
-      id: automl_vision_delete_dataset
-      on_success:
-      - print:
-        - Deleted Dataset.
-      parameters:
-        defaults:
-        - name%dataset = "[Dataset ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%dataset
-          sample_argument_name: dataset_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
   - name: ImportData
     flattening:
       groups:
@@ -968,53 +393,6 @@ interfaces:
       poll_delay_multiplier: 1.5
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
-    samples:
-      standalone:
-      - region_tag: automl_vision_create_model
-        value_sets:
-        - automl_vision_create_model
-    sample_value_sets:
-    - title: Create Model
-      description: Create a model
-      id: automl_vision_create_model
-      on_success:
-      - comment:
-        - "%s returns the model."
-        - list_models
-      - define: model = $resp
-      - print:
-        - 'Model name: %s'
-        - model.name
-      - print:
-        - 'Display name: %s'
-        - model.display_name
-      - comment:
-        - Print image classification model metadata
-      - define: image_classification_metadata = model.image_classification_model_metadata
-      - print:
-        - 'Training budget: %s'
-        - image_classification_metadata.train_budget
-      - print:
-        - 'Training cost: %s'
-        - image_classification_metadata.train_cost
-      - print:
-        - 'Stop reason: %s'
-        - image_classification_metadata.stop_reason
-      - print:
-        - 'Base model ID: %s'
-        - image_classification_metadata.base_model_id
-      - print:
-        - 'Model type: %s'
-        - image_classification_metadata.model_type
-      parameters:
-        defaults:
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
   - name: GetModel
     flattening:
       groups:
@@ -1028,52 +406,6 @@ interfaces:
       name: model
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_get_model
-        value_sets:
-        - automl_vision_get_model
-    sample_value_sets:
-    - title: Get Model
-      description: Get Model
-      id: automl_vision_get_model
-      on_success:
-      - define: model = $resp
-      - print:
-        - 'Model name: %s'
-        - model.name
-      - print:
-        - 'Display name: %s'
-        - model.display_name
-      - comment:
-        - Print image classification model metadata
-      - define: image_classification_metadata = model.image_classification_model_metadata
-      - print:
-        - 'Training budget: %s'
-        - image_classification_metadata.train_budget
-      - print:
-        - 'Training cost: %s'
-        - image_classification_metadata.train_cost
-      - print:
-        - 'Stop reason: %s'
-        - image_classification_metadata.stop_reason
-      - print:
-        - 'Base model ID: %s'
-        - image_classification_metadata.base_model_id
-      - print:
-        - 'Model type: %s'
-        - image_classification_metadata.model_type
-      parameters:
-        defaults:
-        - name%model = "[Model ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%model
-          sample_argument_name: model_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
   - name: ListModels
     flattening:
       groups:
@@ -1094,50 +426,6 @@ interfaces:
       parent: location
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
-    samples:
-      standalone:
-      - region_tag: automl_vision_list_models
-        value_sets:
-        - automl_vision_list_models
-    sample_value_sets:
-    - title: List Models
-      description: List Models
-      id: automl_vision_list_models
-      on_success:
-      - define: model = $resp
-      - print:
-        - 'Model name: %s'
-        - model.name
-      - print:
-        - 'Display name: %s'
-        - model.display_name
-      - comment:
-        - Print image classification model metadata
-      - define: image_classification_metadata = model.image_classification_model_metadata
-      - print:
-        - 'Training budget: %s'
-        - image_classification_metadata.train_budget
-      - print:
-        - 'Training cost: %s'
-        - image_classification_metadata.train_cost
-      - print:
-        - 'Stop reason: %s'
-        - image_classification_metadata.stop_reason
-      - print:
-        - 'Base model ID: %s'
-        - image_classification_metadata.base_model_id
-      - print:
-        - 'Model type: %s'
-        - image_classification_metadata.model_type
-      parameters:
-        defaults:
-        - parent%project = "[Google Cloud Project ID]"
-        - parent%location = "us-central1"
-        attributes:
-        - parameter: parent%project
-          description: Required. Your Google Cloud Project ID.
-          sample_argument_name: project
-        - parameter: parent%location
   - name: DeleteModel
     flattening:
       groups:
@@ -1158,29 +446,6 @@ interfaces:
       poll_delay_multiplier: 1.5
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
-    samples:
-      standalone:
-      - region_tag: automl_vision_delete_model
-        value_sets:
-        - automl_vision_delete_model
-    sample_value_sets:
-    - title: Delete Model
-      description: Delete Model
-      id: automl_vision_delete_model
-      on_success:
-      - print:
-        - Deleted Model.
-      parameters:
-        defaults:
-        - name%model = "[Model ID]"
-        - name%project = "[Google Cloud Project ID]"
-        - name%location = "us-central1"
-        attributes:
-        - parameter: name%model
-          sample_argument_name: model_id
-        - parameter: name%project
-          sample_argument_name: project
-        - parameter: name%location
   - name: DeployModel
     flattening:
       groups:
