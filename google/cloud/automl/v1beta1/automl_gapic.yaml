@@ -184,6 +184,7 @@ interfaces:
         - parameter: dataset.description
           description: User-provided description of dataset (optional)
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
         - parameter: dataset.text_sentiment_dataset_metadata.sentiment_max
@@ -232,6 +233,7 @@ interfaces:
         - parameter: dataset.description
           description: User-provided description of dataset (optional)
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
         - parameter: dataset.image_classification_dataset_metadata.classification_type
@@ -282,6 +284,7 @@ interfaces:
         - parameter: dataset.description
           description: User-provided description of dataset (optional)
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
         - parameter: dataset.translation_dataset_metadata.source_language_code
@@ -322,6 +325,7 @@ interfaces:
         - parameter: dataset.description
           description: User-provided description of dataset (optional)
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
         - parameter: dataset.text_extraction_dataset_metadata
@@ -367,6 +371,7 @@ interfaces:
         - parameter: dataset.description
           description: User-provided description of dataset (optional)
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
         - parameter: dataset.text_classification_dataset_metadata.classification_type
@@ -640,6 +645,7 @@ interfaces:
             An expression for filtering the results of the request.
             This filters for Datasets which have image_classification_dataset_metadata.
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
     - title: List Datasets
@@ -672,6 +678,7 @@ interfaces:
             An expression for filtering the results of the request.
             This filters for Datasets which have text_classification_dataset_metadata.
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
     - title: List Datasets
@@ -707,6 +714,7 @@ interfaces:
             An expression for filtering the results of the request.
             This filters for Datasets which have translation_dataset_metadata.
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
     - title: List Datasets
@@ -740,6 +748,7 @@ interfaces:
             An expression for filtering the results of the request.
             This filters for Datasets which have text_sentiment_dataset_metadata.
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
     - title: List Datasets
@@ -767,6 +776,7 @@ interfaces:
             An expression for filtering the results of the request.
             This filters for Datasets which have text_extraction_dataset_metadata.
         - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
           sample_argument_name: project
         - parameter: parent%location
   - name: DeleteDataset
@@ -958,6 +968,53 @@ interfaces:
       poll_delay_multiplier: 1.5
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
+    samples:
+      standalone:
+      - region_tag: automl_vision_create_model
+        value_sets:
+        - automl_vision_create_model
+    sample_value_sets:
+    - title: Create Model
+      description: Create a model
+      id: automl_vision_create_model
+      on_success:
+      - comment:
+        - "%s returns the model."
+        - list_models
+      - define: model = $resp
+      - print:
+        - 'Model name: %s'
+        - model.name
+      - print:
+        - 'Display name: %s'
+        - model.display_name
+      - comment:
+        - Print image classification model metadata
+      - define: image_classification_metadata = model.image_classification_model_metadata
+      - print:
+        - 'Training budget: %s'
+        - image_classification_metadata.train_budget
+      - print:
+        - 'Training cost: %s'
+        - image_classification_metadata.train_cost
+      - print:
+        - 'Stop reason: %s'
+        - image_classification_metadata.stop_reason
+      - print:
+        - 'Base model ID: %s'
+        - image_classification_metadata.base_model_id
+      - print:
+        - 'Model type: %s'
+        - image_classification_metadata.model_type
+      parameters:
+        defaults:
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
+          sample_argument_name: project
+        - parameter: parent%location
   - name: GetModel
     flattening:
       groups:
@@ -971,6 +1028,52 @@ interfaces:
       name: model
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
+    samples:
+      standalone:
+      - region_tag: automl_vision_get_model
+        value_sets:
+        - automl_vision_get_model
+    sample_value_sets:
+    - title: Get Model
+      description: Get Model
+      id: automl_vision_get_model
+      on_success:
+      - define: model = $resp
+      - print:
+        - 'Model name: %s'
+        - model.name
+      - print:
+        - 'Display name: %s'
+        - model.display_name
+      - comment:
+        - Print image classification model metadata
+      - define: image_classification_metadata = model.image_classification_model_metadata
+      - print:
+        - 'Training budget: %s'
+        - image_classification_metadata.train_budget
+      - print:
+        - 'Training cost: %s'
+        - image_classification_metadata.train_cost
+      - print:
+        - 'Stop reason: %s'
+        - image_classification_metadata.stop_reason
+      - print:
+        - 'Base model ID: %s'
+        - image_classification_metadata.base_model_id
+      - print:
+        - 'Model type: %s'
+        - image_classification_metadata.model_type
+      parameters:
+        defaults:
+        - name%model = "[Model ID]"
+        - name%project = "[Google Cloud Project ID]"
+        - name%location = "us-central1"
+        attributes:
+        - parameter: name%model
+          sample_argument_name: model_id
+        - parameter: name%project
+          sample_argument_name: project
+        - parameter: name%location
   - name: ListModels
     flattening:
       groups:
@@ -991,6 +1094,50 @@ interfaces:
       parent: location
     resource_name_treatment: STATIC_TYPES
     timeout_millis: 5000
+    samples:
+      standalone:
+      - region_tag: automl_vision_list_models
+        value_sets:
+        - automl_vision_list_models
+    sample_value_sets:
+    - title: List Models
+      description: List Models
+      id: automl_vision_list_models
+      on_success:
+      - define: model = $resp
+      - print:
+        - 'Model name: %s'
+        - model.name
+      - print:
+        - 'Display name: %s'
+        - model.display_name
+      - comment:
+        - Print image classification model metadata
+      - define: image_classification_metadata = model.image_classification_model_metadata
+      - print:
+        - 'Training budget: %s'
+        - image_classification_metadata.train_budget
+      - print:
+        - 'Training cost: %s'
+        - image_classification_metadata.train_cost
+      - print:
+        - 'Stop reason: %s'
+        - image_classification_metadata.stop_reason
+      - print:
+        - 'Base model ID: %s'
+        - image_classification_metadata.base_model_id
+      - print:
+        - 'Model type: %s'
+        - image_classification_metadata.model_type
+      parameters:
+        defaults:
+        - parent%project = "[Google Cloud Project ID]"
+        - parent%location = "us-central1"
+        attributes:
+        - parameter: parent%project
+          description: Required. Your Google Cloud Project ID.
+          sample_argument_name: project
+        - parameter: parent%location
   - name: DeleteModel
     flattening:
       groups:
@@ -1011,6 +1158,29 @@ interfaces:
       poll_delay_multiplier: 1.5
       max_poll_delay_millis: 5000
       total_poll_timeout_millis: 300000
+    samples:
+      standalone:
+      - region_tag: automl_vision_delete_model
+        value_sets:
+        - automl_vision_delete_model
+    sample_value_sets:
+    - title: Delete Model
+      description: Delete Model
+      id: automl_vision_delete_model
+      on_success:
+      - print:
+        - Deleted Model.
+      parameters:
+        defaults:
+        - name%model = "[Model ID]"
+        - name%project = "[Google Cloud Project ID]"
+        - name%location = "us-central1"
+        attributes:
+        - parameter: name%model
+          sample_argument_name: model_id
+        - parameter: name%project
+          sample_argument_name: project
+        - parameter: name%location
   - name: DeployModel
     flattening:
       groups:

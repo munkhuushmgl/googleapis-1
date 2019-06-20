@@ -38,6 +38,7 @@ samples:
   - field: parent%project
     value: "[Google Cloud Project ID]"
     input_parameter: project
+    comment: Required. Your Google Cloud Project ID.
   - field: parent%location
     value: us-central1
   - field: dataset.translation_dataset_metadata.source_language_code

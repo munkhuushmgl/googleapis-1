@@ -7,6 +7,7 @@ templates:
   - field: parent%project
     value: "[Google Cloud Project ID]"
     input_parameter: project
+    comment: Required. Your Google Cloud Project ID.
 
 # Location (in parent path)
 - name: Location (in parent path)

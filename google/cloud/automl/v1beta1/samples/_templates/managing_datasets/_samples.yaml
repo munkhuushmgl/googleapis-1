@@ -62,6 +62,11 @@ templates:
   rpc: ListDatasets
   mixins:
   - Project and Location (in parent path)
+  # TODO
+  # request:
+  # - field: filter
+  #   value: "*"
+  #   comment: An expression for filtering the results of the request.
   response:
   - define: dataset = $resp
   - include: Print Dataset Information
