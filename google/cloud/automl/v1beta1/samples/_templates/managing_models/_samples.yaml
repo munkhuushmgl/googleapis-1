@@ -1,0 +1,113 @@
+templates:
+
+# Full Model Name (request)
+- name: Full Model Name (request)
+  mixins:
+  - Project and Location (in resource name)
+  request:
+  - field: name%model
+    value: "[Model ID]"
+    input_parameter: model_id
+
+# Full Model Name (on model)
+- name: Full Model Name (on model)
+  request:
+  - field: model.name%project
+    value: "[Google Cloud Project ID]"
+    input_parameter: project
+  - field: model.name%location
+    value: "us-central1"
+  - field: model.name%model
+    value: "[Model ID]"
+    input_parameter: model_id
+
+# Print Model Information
+- name: Print Model Information
+  response:
+  - print: ["Model name: %s", model.name]
+  - print: ["Display name: %s", model.display_name]
+  - yield: model
+
+# Create
+- name:  AutoML Create Model
+  title: Create Model
+  description: Create a model
+  service: AutoMl
+  rpc: CreateModel
+  mixins:
+  - Project and Location (in parent path)
+  request:
+  # - field: model.display_name
+  #   value: "Display_Name_123"
+  #   comment: |
+  #     The name of the model to show in the interface.
+  #     The name can be up to 32 characters long and can consist only of
+  #     ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
+  #     Must be unique within the scope of the provided GCP Project and Location.
+  #   input_parameter: display_name
+  # - field: model.description
+  #   value: "Description of this model"
+  #   comment: "User-provided description of model (optional)"
+  response:
+  - comment:
+    - "%s returns the model."
+    - list_models
+  - define: model = $resp
+  - include: Print Model Information
+
+# List
+- name:  AutoML List Models
+  title: List Models
+  description: List Models
+  service: AutoMl
+  rpc: ListModels
+  mixins:
+  - Project and Location (in parent path)
+  # request:
+  # - field: filter
+  #   value: "*"
+  #   comment: An expression for filtering the results of the request.
+  #   input_parameter: filter
+  response:
+  - define: model = $resp
+  - include: Print Model Information
+
+# Get
+- name:  AutoML Get Model
+  title: Get Model
+  description: Get Model
+  service: AutoMl
+  rpc: GetModel
+  mixins:
+  - Full Model Name (request)
+  response:
+  - define: model = $resp
+  - include: Print Model Information
+
+# Update
+- name:  AutoML Update Model
+  title: Update Model
+  description: Update Model
+  service: AutoMl
+  rpc: UpdateModel
+  mixins:
+  - Full Model Name (on model)
+  request:
+  - field: model.description
+    value: "Updated model description value"
+    input_parameter: description
+  response:
+  - print: "Updated Model."
+  - define: model = $resp
+  - include: Print Model Information
+
+# Delete
+- name:  AutoML Delete Model
+  title: Delete Model
+  description: Delete Model
+  service: AutoMl
+  rpc: DeleteModel
+  mixins:
+  - Full Model Name (request)
+  response:
+  - print: "Deleted Model."

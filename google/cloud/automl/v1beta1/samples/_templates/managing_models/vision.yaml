@@ -1,0 +1,73 @@
+templates:
+- name: AutoML Vision Classification Model Metatdata (request)
+  # request:
+  # - field: model.image_classification_model_metadata.classification_type
+  #   value: MULTILABEL
+  #   comment: |
+  #     Type of the classification problem.
+  #     MULTICLASS: At most one label is allowed per example.
+  #     MULTILABEL: Multiple labels are allowed for one example.
+- name: AutoML Vision Classification Model Metatdata (response)
+  response:
+  - comment: Print image classification model metadata
+  - define: image_classification_metadata = model.image_classification_model_metadata
+  - $print: "Training budget: {image_classification_metadata.train_budget}"
+  - $print: "Training cost: {image_classification_metadata.train_cost}"
+  - $print: "Stop reason: {image_classification_metadata.stop_reason}"
+  - $print: "Base model ID: {image_classification_metadata.base_model_id}"
+  - $print: "Model type: {image_classification_metadata.model_type}"
+
+samples:
+# Create
+- region_tag: automl_vision_create_model
+  mixins:
+  - AutoML Create Model
+  - AutoML Vision Classification Model Metatdata (request)
+  response:
+  - include: AutoML Create Model
+    with:
+      model:
+      - include: AutoML Vision Classification Model Metatdata (response)
+# List
+- region_tag: automl_vision_list_models@
+  mixins:
+  - AutoML List Models
+  request:
+  # - field: filter
+  #   value: "image_classification_model_metadata:*"
+  #   comment: |
+  #       An expression for filtering the results of the request.
+  #       This filters for Models which have image_classification_model_metadata.
+  response:
+  - include: AutoML List Models
+    with:
+      model:
+      - include: AutoML Vision Classification Model Metatdata (response)
+# Get
+- region_tag: automl_vision_get_model
+  mixins:
+  - AutoML Get Model
+  response:
+  - include: AutoML Get Model
+    with:
+      model:
+      - include: AutoML Vision Classification Model Metatdata (response)
+# Delete
+- region_tag: automl_vision_delete_model
+  mixins:
+  - AutoML Delete Model
+
+# tests:
+# - suite: AutoML Vision – Model Management
+#   filename: automl_vision_models
+#   test_template: AutoML Model Management Test Suite
+#   test_data:
+#     create_model_sample: automl_vision_create_model
+#     list_models_sample: automl_vision_list_models
+#     get_model_sample: automl_vision_get_model
+#     delete_model_sample: automl_vision_delete_model
+#     create_model_assertions: &assert_classification_type_printed
+#     - assert_contains:
+#       - literal: "Image classification model metadata type: MULTILABEL"
+#     list_models_assertions: *assert_classification_type_printed
+#     get_model_assertions: *assert_classification_type_printed

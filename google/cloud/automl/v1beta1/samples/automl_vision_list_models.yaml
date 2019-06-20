@@ -1,0 +1,58 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# DO NOT EDIT! This is a generated sample configuration.
+
+---
+type: com.google.api.codegen.SampleConfigProto
+schema_version: 1.2.0
+samples:
+- region_tag: automl_vision_list_models
+  title: List Models
+  description: List Models
+  service: AutoMl
+  rpc: ListModels
+  request:
+  - field: parent%project
+    value: "[Google Cloud Project ID]"
+    input_parameter: project
+    comment: Required. Your Google Cloud Project ID.
+  - field: parent%location
+    value: us-central1
+  response:
+  - define: model = $resp
+  - print:
+    - 'Model name: %s'
+    - model.name
+  - print:
+    - 'Display name: %s'
+    - model.display_name
+  - comment:
+    - Print image classification model metadata
+  - define: image_classification_metadata = model.image_classification_model_metadata
+  - print:
+    - 'Training budget: %s'
+    - image_classification_metadata.train_budget
+  - print:
+    - 'Training cost: %s'
+    - image_classification_metadata.train_cost
+  - print:
+    - 'Stop reason: %s'
+    - image_classification_metadata.stop_reason
+  - print:
+    - 'Base model ID: %s'
+    - image_classification_metadata.base_model_id
+  - print:
+    - 'Model type: %s'
+    - image_classification_metadata.model_type
