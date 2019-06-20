@@ -27,12 +27,14 @@ templates:
   - field: name%project
     value: "[Google Cloud Project ID]"
     input_parameter: project
+    comment: Required. Your Google Cloud Project ID.
 
 # Location (in resource name)
 - name: Location (in resource name)
   request:
   - field: name%location
     value: "us-central1"
+    comment: "Compute Region, e.g. us-central1"
 
 # Project and Location (in resource name)
 - name: Project and Location (in resource name)

@@ -29,7 +29,7 @@ samples:
       model:
       - include: AutoML Vision Classification Model Metatdata (response)
 # List
-- region_tag: automl_vision_list_models@
+- region_tag: automl_vision_list_models
   mixins:
   - AutoML List Models
   request:

@@ -15,7 +15,8 @@ sample_compositions:
 
 # Save samples in automl_gapic.yaml in legacy v1.1 format
 - output: ../automl_gapic.yaml
-  region_tags: /video.*object_detection/i
+  region_tags: /video_object_tracking/
+  test_suites: /Video/i
   paths:
   - _templates/_common.yaml
 
@@ -26,13 +27,15 @@ sample_compositions:
   - _templates/managing_datasets/natural_language_sentiment.yaml
   - _templates/managing_datasets/translation.yaml
   - _templates/managing_datasets/vision.yaml
+  - _templates/managing_datasets/video_object_tracking.yaml
 
   - _templates/managing_models/_samples.yaml
   - _templates/managing_models/vision.yaml
 
 # Output individual sample files in v1.2 format in samples/ dir for generator
 - output: .
-  region_tags: /video.*object_detection/i
+  region_tags: /video_object_tracking/
+  test_suites: /Video/i
   paths:
   - _templates/_common.yaml
 
@@ -43,6 +46,7 @@ sample_compositions:
   - _templates/managing_datasets/natural_language_sentiment.yaml
   - _templates/managing_datasets/translation.yaml
   - _templates/managing_datasets/vision.yaml
+  - _templates/managing_datasets/video_object_tracking.yaml
 
   - _templates/managing_models/_samples.yaml
   - _templates/managing_models/vision.yaml

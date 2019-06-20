@@ -10,6 +10,7 @@
 # ...
 # request:
 # - $field: ${automl.video_object_tracking.metadata_field}
+#   $comment: $automl.field_descriptions.dataset_id
 #
 
 templates:
@@ -29,16 +30,35 @@ templates:
 
 samples:
 
+####
+# TODO templatize
+####
+- region_tag: automl_video_object_tracking_import_data@
+  service: AutoMl
+  rpc: ImportData
+  mixins:
+  - Project and Location (in resource name)
+  response:
+  - print: "Imported data."
+  request:
+  - field: name%dataset
+    input_parameter: dataset_id
+    value: "[Dataset ID]"
+    comment: Identifier of the dataset into which to import data.
+  - field: input_config.gcs_source.input_uris[0]
+    value: "gs://automl-video-datasets/youtube_8m_videos_animal_tiny.csv"
+    comment: |
+      Path to .csv defining data to import.
+      See "Preparing your training data" for more information
+      https://cloud.google.com/video-intelligence/automl/object-tracking/docs/prepare
+
+####
+
 # Create
 - region_tag: automl_video_object_tracking_create_dataset
   mixins:
   - AutoML Create Dataset
   - AutoML Video Object Tracking Metatdata (request)
-  response:
-  - include: AutoML Create Dataset
-    with:
-      dataset:
-      - include: AutoML Video Object Tracking Metatdata (response)
 
 # List
 - region_tag: automl_video_object_tracking_list_datasets
@@ -50,21 +70,11 @@ samples:
     comment: |
         An expression for filtering the results of the request.
         This filters for Datasets which have video_object_tracking_dataset_metadata.
-  response:
-  - include: AutoML List Datasets
-    with:
-      dataset:
-      - include: AutoML Video Object Tracking Metatdata (response)
 
 # Get
 - region_tag: automl_video_object_tracking_get_dataset
   mixins:
   - AutoML Get Dataset
-  response:
-  - include: AutoML Get Dataset
-    with:
-      dataset:
-      - include: AutoML Video Object Tracking Metatdata (response)
 
 # Delete
 - region_tag: automl_video_object_tracking_delete_dataset

@@ -1,0 +1,46 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# DO NOT EDIT! This is a generated sample configuration.
+
+---
+type: com.google.api.codegen.SampleConfigProto
+schema_version: 1.2.0
+samples:
+- region_tag: automl_video_object_tracking_import_data
+  title: " Import Data"
+  description: " Import Data"
+  service: AutoMl
+  rpc: ImportData
+  request:
+  - field: name%dataset
+    input_parameter: dataset_id
+    value: "[Dataset ID]"
+    comment: Identifier of the dataset into which to import data.
+  - field: input_config.gcs_source.input_uris[0]
+    value: gs://automl-video-datasets/youtube_8m_videos_animal_tiny.csv
+    comment: |
+      Path to .csv defining data to import.
+      See "Preparing your training data" for more information
+      https://cloud.google.com/video-intelligence/automl/object-tracking/docs/prepare
+  - field: name%project
+    value: "[Google Cloud Project ID]"
+    input_parameter: project
+    comment: Required. Your Google Cloud Project ID.
+  - field: name%location
+    value: us-central1
+    comment: Compute Region, e.g. us-central1
+  response:
+  - print:
+    - Imported data.
