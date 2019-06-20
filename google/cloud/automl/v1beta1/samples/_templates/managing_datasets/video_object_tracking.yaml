@@ -1,0 +1,91 @@
+##
+# AutoML :: Video Object Tracking
+##
+
+# variables:
+#   automl:
+#     video_object_tracking:
+#       metadata_field: dataset.video_object_tracking_dataset_metadata
+#
+# ...
+# request:
+# - $field: ${automl.video_object_tracking.metadata_field}
+#
+
+templates:
+
+# [Request] field(s) for creating Dataset for: Video Object Tracking
+- name: AutoML Video Object Tracking Metatdata (request)
+  request:
+  - field: dataset.video_object_tracking_dataset_metadata
+    value: {}
+    comment: |
+      Initialized video_object_tracking_dataset_metadata field must be provided.
+      This specifies this Dataset is to be used for video object tracking.
+
+# [Response] field(s) on Dataset to demonstrate for: Video Object Tracking
+#
+# –> N/A – nothing to show from the video_object_tracking_dataset_metadata field
+
+samples:
+
+# Create
+- region_tag: automl_video_object_tracking_create_dataset
+  mixins:
+  - AutoML Create Dataset
+  - AutoML Video Object Tracking Metatdata (request)
+  response:
+  - include: AutoML Create Dataset
+    with:
+      dataset:
+      - include: AutoML Video Object Tracking Metatdata (response)
+
+# List
+- region_tag: automl_video_object_tracking_list_datasets
+  mixins:
+  - AutoML List Datasets
+  request:
+  - field: filter
+    value: "video_object_tracking_dataset_metadata:*"
+    comment: |
+        An expression for filtering the results of the request.
+        This filters for Datasets which have video_object_tracking_dataset_metadata.
+  response:
+  - include: AutoML List Datasets
+    with:
+      dataset:
+      - include: AutoML Video Object Tracking Metatdata (response)
+
+# Get
+- region_tag: automl_video_object_tracking_get_dataset
+  mixins:
+  - AutoML Get Dataset
+  response:
+  - include: AutoML Get Dataset
+    with:
+      dataset:
+      - include: AutoML Video Object Tracking Metatdata (response)
+
+# Delete
+- region_tag: automl_video_object_tracking_delete_dataset
+  mixins:
+  - AutoML Delete Dataset
+
+tests:
+
+# Test Dataset Management
+- suite: AutoML Vision – Dataset Management
+  filename: automl_video_object_tracking_datasets
+  test_template: AutoML Dataset Management Test Suite
+  test_data:
+    # Sample Region Tags
+    create_dataset_sample: automl_video_object_tracking_create_dataset
+    list_datasets_sample: automl_video_object_tracking_list_datasets
+    get_dataset_sample: automl_video_object_tracking_get_dataset
+    delete_dataset_sample: automl_video_object_tracking_delete_dataset
+    # Custom Assertions for Dataset Management tests
+    create_dataset_assertions: &assert_classification_type_printed
+    - assert_contains:
+      - literal: "Image classification dataset metadata type: MULTILABEL"
+    list_datasets_assertions: *assert_classification_type_printed
+    get_dataset_assertions: *assert_classification_type_printed
